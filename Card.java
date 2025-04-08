@@ -14,6 +14,7 @@ public class Card {
     private BufferedImage image;
     private Rectangle cardBox;
     private boolean highlight;
+    private static ArrayList<Card> deck;
 
     public Card(String suit, String value) {
         this.suit = suit;
@@ -26,6 +27,7 @@ public class Card {
         // the front image, or the back image
         this.image = readImage();
 
+        deck = buildDeck();
 
         this.cardBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
         this.highlight = false;
@@ -108,7 +110,6 @@ public class Card {
     }
 
     public static ArrayList<Card> replaceCard(ArrayList<Card> hand, Card card){
-        ArrayList<Card> deck = Card.buildDeck();
         int insertPoint = hand.indexOf(card);
         hand.remove(card);
         int r = (int)(Math.random()*deck.size());
@@ -118,7 +119,6 @@ public class Card {
     }
 
     public static ArrayList<Card> buildHand() {
-        ArrayList<Card> deck = Card.buildDeck();
         ArrayList<Card> hand = new ArrayList<Card>();
         for (int i = 0; i < 9; i++) {
             int r = (int)(Math.random()*deck.size());
